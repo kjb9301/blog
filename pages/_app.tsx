@@ -1,12 +1,16 @@
 import { AppProps } from 'next/app';
 
+import GlobalStyles from '../lib/styles/global-styles';
 import Template from '../components/common/Template';
 
 function BlogApp({ Component, pageProps }: AppProps) {
   return (
-    <Template>
-      <Component {...pageProps} />
-    </Template>
+    <>
+      <GlobalStyles />
+      <Template>
+        <Component {...pageProps} />
+      </Template>
+    </>
   );
 }
 
