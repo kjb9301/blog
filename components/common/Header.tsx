@@ -20,6 +20,7 @@ function Header() {
 }
 
 const Wrapper = styled.header`
+  height: 60px;
   padding: 5px 20px;
   display: flex;
   align-items: center;

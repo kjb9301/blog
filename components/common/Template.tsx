@@ -18,6 +18,8 @@ function Template({ children }: TemplateProps) {
 
 const Container = styled.main`
   border: 1px solid red;
+  display: flex;
+  justify-content: center;
 `;
 
 export default Template;
