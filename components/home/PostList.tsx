@@ -1,9 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+
+import PostItem from './PostItem'
+
 function PostList() {
   return (
     <Wrapper>
-      post list
+      <PostItem />
+      <PostItem />
+      <PostItem />
     </Wrapper>
   )
 }
