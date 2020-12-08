@@ -1,16 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import CategoryList from './CategoryList'
+
 function CategoryTab() {
   return (
     <Wrapper>
-      category tab
+      <CategoryList />
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
-  border: 1px solid red;
+  margin-bottom: 20px;
 `;
 
 export default CategoryTab
