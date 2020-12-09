@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import post, {postSaga} from './post';
+import post, { postSaga } from './post';
 import { all } from 'redux-saga/effects';
 
 const rootReducer = combineReducers({

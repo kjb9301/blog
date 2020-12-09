@@ -11,4 +11,9 @@ export type PostState = {
     error: Error | null;
     data: Post[] | null;
   };
+  post: {
+    loading: boolean;
+    error: Error | null;
+    data: Post | null;
+  }
 };

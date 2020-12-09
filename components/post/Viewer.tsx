@@ -1,5 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import 'codemirror/lib/codemirror.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
 import { ViewerProps as TuiViewerProps } from '@toast-ui/react-editor';
 
 type ViewerProps = {

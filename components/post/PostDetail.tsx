@@ -16,6 +16,9 @@ function PostDetail() {
 }
 
 const Wrapper = styled.div`
+  width: 100%;
+  max-width: 40rem;
+  min-height: calc(100vh - 60px);
   padding-bottom: 5rem;
 `;
 

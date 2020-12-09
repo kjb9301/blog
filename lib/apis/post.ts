@@ -4,7 +4,6 @@ import {convertToDate} from '../utils/date'
 const postCollection = fireStore.collection('posts');
 
 export async function GetPosts() {
-  console.log('start')
   const response = await postCollection
     .get()
     .then((snapshot) => {
@@ -23,5 +22,28 @@ export async function GetPosts() {
       return err;
     });
 
+  return response;
+}
+
+export async function GetPost(id: string) {
+  const response = await postCollection
+    .doc(id)
+    .get()
+    .then((docSnapshot) => {
+      const docData = docSnapshot.data();
+      if (docData) {
+        const data = {
+          ...docData,
+          id: id,
+          regDate: convertToDate(docData.regDate),
+        };
+
+        return data;
+      }
+    })
+    .catch((err) => {
+      return err;
+    });
+  console.log(response)
   return response;
 }
