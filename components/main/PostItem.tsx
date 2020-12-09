@@ -8,7 +8,7 @@ type PostItemProps = {
 }
 
 function PostItem({ post }: PostItemProps) {
-  const { title, description, regDate } = post;
+  const { id, title, description, regDate } = post;
   return (
     <Wrapper>
       <ItemHeader>

@@ -4,18 +4,17 @@ import { END } from 'redux-saga';
 
 import { getPostsAsync } from '../store/modules/post'
 import { wrapper } from '../store/store'
-import { SagaStore } from '../store/store'
 import { Post } from '../lib/types'
 
-import About from '../components/home/About'
-import CategoryTab from '../components/home/CategoryTab'
-import PostList from '../components/home/PostList'
+import About from '../components/main/About'
+import CategoryTab from '../components/main/CategoryTab'
+import PostList from '../components/main/PostList'
 
-type HomePageProps = {
+type MainPageProps = {
   posts: Post[];
 }
 
-function Home({ posts }: HomePageProps) {
+function MainPage({ posts }: MainPageProps) {
   return (
     <Wrapper>
       <About />
@@ -47,4 +46,4 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   }
 )
 
-export default Home;
+export default MainPage;

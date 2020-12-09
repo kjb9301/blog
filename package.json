@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@toast-ui/react-editor": "^2.5.1",
     "@types/next-redux-saga": "^3.0.2",
     "@types/styled-components": "^5.1.4",
     "babel-plugin-styled-components": "^1.12.0",
