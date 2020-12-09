@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import { Post } from '../../lib/types';
 
@@ -10,16 +11,18 @@ type PostItemProps = {
 function PostItem({ post }: PostItemProps) {
   const { id, title, description, regDate } = post;
   return (
-    <Wrapper>
-      <ItemHeader>
-        <p className='post-title'>{title}</p>
-        <p className='post-date'>{regDate}</p>
-      </ItemHeader>
-      <ItemBody>
-        <p className='post-content'>{description}</p>
-        <p className='text-readmore'>{`...read more`}</p>
-      </ItemBody>
-    </Wrapper>
+    <Link as={`/${title}`} href={{ pathname: `/${id}` }}>
+      <Wrapper>
+        <ItemHeader>
+          <p className='post-title'>{title}</p>
+          <p className='post-date'>{regDate}</p>
+        </ItemHeader>
+        <ItemBody>
+          <p className='post-content'>{description}</p>
+          <p className='text-readmore'>{`...read more`}</p>
+        </ItemBody>
+      </Wrapper>
+    </Link>
   );
 }
 
