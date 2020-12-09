@@ -1,15 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function PostItem() {
+import { Post } from '../../lib/types';
+
+type PostItemProps = {
+  post: Post;
+}
+
+function PostItem({ post }: PostItemProps) {
+  const { title, description, regDate } = post;
   return (
     <Wrapper>
       <ItemHeader>
-        <p className='post-title'>{`title`}</p>
-        <p className='post-date'>{`date`}</p>
+        <p className='post-title'>{title}</p>
+        <p className='post-date'>{regDate}</p>
       </ItemHeader>
       <ItemBody>
-        <p className='post-content'>{`content`}</p>
+        <p className='post-content'>{description}</p>
         <p className='text-readmore'>{`...read more`}</p>
       </ItemBody>
     </Wrapper>

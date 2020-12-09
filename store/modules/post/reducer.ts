@@ -1,6 +1,6 @@
 import { createReducer } from 'typesafe-actions';
 import { PostState, PostAction } from './types';
-import { GET_POSTS,GET_POSTS_SUCCESS,GET_POSTS_ERROR } from './actions';
+import { GET_POSTS, GET_POSTS_SUCCESS, GET_POSTS_ERROR } from './actions';
 
 const initialState: PostState = {
   posts: {

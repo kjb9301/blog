@@ -1,10 +1,11 @@
 import { fireStore } from '../common/firebase';
+import {convertToDate} from '../utils/date'
 
 const postCollection = fireStore.collection('posts');
 
-export function GetPosts() {
+export async function GetPosts() {
   console.log('start')
-  const response = postCollection
+  const response = await postCollection
     .get()
     .then((snapshot) => {
       return snapshot.docs.map((doc) => {
@@ -12,6 +13,7 @@ export function GetPosts() {
         const data = {
           ...docData,
           id: doc.id,
+          regDate: convertToDate(docData.regDate),
         };
 
         return data;

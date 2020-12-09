@@ -1,32 +1,22 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import styled from 'styled-components'
 
-import { GetPosts } from '../../lib/apis/post'
-import { getPostsAsync } from '../../store/modules/post'
+import { Post } from '../../lib/types'
 
 import PostItem from './PostItem'
 
-function PostList() {
-  const data = useSelector(state => state.post)
-  console.log(data);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    console.log('useEffect');
-    const getData = () => {
-      const data = dispatch(getPostsAsync.request());
-      console.log(data);
-      return data
-    }
+type PostListProps = {
+  posts: Post[];
+}
 
-    getData();
-  }, [])
-
+function PostList({ posts }: PostListProps) {
   return (
     <Wrapper>
-      <PostItem />
-      <PostItem />
-      <PostItem />
+      {posts.map((post) => {
+        return (
+          <PostItem key={post.id} post={post} />
+        )
+      })}
     </Wrapper>
   )
 }
