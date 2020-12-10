@@ -25,6 +25,16 @@ export async function GetPosts() {
   return response;
 }
 
+export function GetPostIds() {
+  const response = postCollection
+    .get()
+    .then((snapshot) => {
+      return snapshot.docs.map((doc) => doc.id)
+    })
+  
+  return response;
+}
+
 export async function GetPost(id: string) {
   const response = await postCollection
     .doc(id)
@@ -44,6 +54,6 @@ export async function GetPost(id: string) {
     .catch((err) => {
       return err;
     });
-  console.log(response)
+  console.log('result',response)
   return response;
 }

@@ -1,16 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Post } from '../../lib/types';
+
 import ButtonGroup from './ButtonGroup';
 import Viewer from './Viewer';
 
-function PostDetail() {
+type PostDetailProps = {
+  post: Post;
+}
+
+function PostDetail({ post }: PostDetailProps) {
+  const { title, regDate, htmlContent } = post;
+
   return (
     <Wrapper>
       <ButtonGroup />
-      <Title>{`title`}</Title>
-      <Date>{`regDate`}</Date>
-      <Viewer htmlContent={`htmlContent`} />
+      <Title>{title}</Title>
+      <Date>{regDate}</Date>
+      <Viewer htmlContent={htmlContent} />
     </Wrapper>
   );
 }
