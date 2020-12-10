@@ -2,9 +2,11 @@ import { getPostsAsync, GET_POSTS, getPostAsync, GET_POST } from './actions';
 import { GetPosts, GetPost } from '../../../lib/apis/post';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-function* getPostsSaga() {
+function* getPostsSaga(action?: ReturnType<typeof getPostsAsync.request>) {
   try {
-    const posts = yield call(GetPosts);
+    const category = action !== undefined ? action.payload : '';
+    
+    const posts = yield call(GetPosts, category);
     yield put(getPostsAsync.success(posts));
   } catch (e) {
     yield put(getPostsAsync.failure(e));

@@ -1,16 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 type CategoryListProps = {
   categoryList: string[];
+  selectedCtg: string;
+  onClickCategory: (value: string) => void;
 }
 
-function Categories({ categoryList }: CategoryListProps) {
+function Categories({ categoryList, selectedCtg, onClickCategory }: CategoryListProps) {
   return (
     <>
       {categoryList.map(category => {
         return (
-          <Category key={category}>{category}</Category>
+          <Category key={category} className={selectedCtg === category ? 'selected' : ''} onClick={() => onClickCategory(category)}>{category}</Category>
         )
       })}
     </>

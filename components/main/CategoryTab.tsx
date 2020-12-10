@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import useCategory from '../../hooks/useCategory'
+
 import Categories from './Categories'
 
 type CategoryTabProps = {
@@ -8,11 +10,13 @@ type CategoryTabProps = {
 }
 
 function CategoryTab({ categoryList }: CategoryTabProps) {
+  const { selectedCtg, onClickCategory } = useCategory();
+
   return (
     <Wrapper>
       <CtgWrapper>
-        <Category>All</Category>
-        <Categories categoryList={categoryList} />
+        <Category className={selectedCtg === '' ? 'selected' : ''} onClick={() => onClickCategory('')}>All</Category>
+        <Categories categoryList={categoryList} selectedCtg={selectedCtg} onClickCategory={onClickCategory} />
       </CtgWrapper>
     </Wrapper>
   )
