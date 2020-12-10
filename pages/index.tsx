@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import { END } from 'redux-saga';
 
 import { getPostsAsync } from '../store/modules/post'
+import { getCategoriesAsync } from '../store/modules/category'
 import { wrapper } from '../store/store'
 import { Post } from '../lib/types'
 
@@ -12,13 +13,14 @@ import PostList from '../components/main/PostList'
 
 type MainPageProps = {
   posts: Post[];
+  categoryList: string[];
 }
 
-function MainPage({ posts }: MainPageProps) {
+function MainPage({ posts, categoryList }: MainPageProps) {
   return (
     <Wrapper>
       <About />
-      <CategoryTab />
+      <CategoryTab categoryList={categoryList} />
       <PostList posts={posts} />
     </Wrapper>
   );
@@ -35,13 +37,15 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async ({ store }) => {
 
     store.dispatch(getPostsAsync.request())
+    store.dispatch(getCategoriesAsync.request())
     store.dispatch(END)
 
     await store.sagaTask.toPromise();
-    const { data } = store.getState().post.posts
-    console.log('data', data)
+    const posts = store.getState().post.posts.data;
+    const categoryList = store.getState().category.categoryList.data;
+
     return {
-      props: { posts: data }
+      props: { posts, categoryList }
     }
   }
 )

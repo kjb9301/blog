@@ -11,7 +11,7 @@ function* getPostsSaga() {
   }
 }
 
-function* getPostSaga(action) {
+function* getPostSaga(action: ReturnType<typeof getPostAsync.request>) {
   const id = action.payload;
   try {
     const post = yield call(GetPost, id);
