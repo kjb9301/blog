@@ -4,9 +4,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* getPostsSaga(action?: ReturnType<typeof getPostsAsync.request>) {
   try {
-    const category = action !== undefined ? action.payload : '';
-    
-    const posts = yield call(GetPosts, category);
+    const posts = yield call(GetPosts, action.payload);
     yield put(getPostsAsync.success(posts));
   } catch (e) {
     yield put(getPostsAsync.failure(e));

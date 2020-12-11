@@ -4,8 +4,11 @@ import {convertToDate} from '../utils/date'
 const postCollection = fireStore.collection('posts');
 
 export async function GetPosts(category?: string) {
-  const response = await postCollection
-    .where('category', '==', category)
+  const newPostCollection = category
+    ? postCollection.where('category', "==", category)
+    : postCollection;
+
+  const response = await newPostCollection
     .get()
     .then((snapshot) => {
       return snapshot.docs.map((doc) => {

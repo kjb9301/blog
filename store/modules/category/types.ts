@@ -9,4 +9,5 @@ export type CategoryState = {
     error: Error | null;
     data: string[] | null;
   };
+  selectedCategory: string;
 };

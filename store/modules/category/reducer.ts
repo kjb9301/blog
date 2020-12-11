@@ -1,14 +1,15 @@
 import { createReducer } from 'typesafe-actions';
 
 import { CategoryState, CategoryAction } from './types';
-import { GET_CATEGORIES, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_ERROR } from './actions';
+import { GET_CATEGORIES, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_ERROR, SET_CATEGORY } from './actions';
 
 const initialState: CategoryState = {
   categoryList: {
     loading: false,
     error: null,
     data: null
-  }
+  },
+  selectedCategory: '',
 };
 
 const category = createReducer<CategoryState, CategoryAction>(initialState, {
@@ -35,6 +36,10 @@ const category = createReducer<CategoryState, CategoryAction>(initialState, {
       error: action.payload,
       data: null
     }
+  }),
+  [SET_CATEGORY]: (state, action) => ({
+    ...state,
+    selectedCategory: action.payload,
   })
 });
 
