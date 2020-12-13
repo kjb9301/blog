@@ -1,22 +1,17 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-import { Post } from '../../lib/types'
-import useCategory from '../../hooks/useCategory'
-import { getPostsAsync } from '../../store/modules/post'
+import { RootState } from '../../store/modules';
 
-import PostItem from './PostItem'
+import PostItem from './PostItem';
 
-type PostListProps = {
-  posts: Post[];
-}
-
-function PostList({ posts }: PostListProps) {
+function PostList() {
+  const posts = useSelector((state: RootState) => state.post.posts.data);
 
   return (
     <Wrapper>
-      {posts.map((post) => {
+      {posts && posts.map((post) => {
         return (
           <PostItem key={post.id} post={post} />
         )
@@ -29,4 +24,4 @@ const Wrapper = styled.section`
   border: 1px solid green;
 `;
 
-export default PostList
+export default PostList;

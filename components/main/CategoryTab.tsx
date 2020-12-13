@@ -1,22 +1,21 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-import useCategory from '../../hooks/useCategory'
+import { RootState } from '../../store/modules';
+import useCategory from '../../hooks/useCategory';
 
-import Categories from './Categories'
+import Categories from './Categories';
 
-type CategoryTabProps = {
-  categoryList: string[]
-}
-
-function CategoryTab({ categoryList }: CategoryTabProps) {
+function CategoryTab() {
   const { selectedCtg, onClickCategory } = useCategory();
+  const categoryList = useSelector((state: RootState) => state.category.categoryList.data)
 
   return (
     <Wrapper>
       <CtgWrapper>
         <Category className={selectedCtg === '' ? 'selected' : ''} onClick={() => onClickCategory('')}>All</Category>
-        <Categories categoryList={categoryList} selectedCtg={selectedCtg} onClickCategory={onClickCategory} />
+        {categoryList && <Categories categoryList={categoryList} selectedCtg={selectedCtg} onClickCategory={onClickCategory} />}
       </CtgWrapper>
     </Wrapper>
   )

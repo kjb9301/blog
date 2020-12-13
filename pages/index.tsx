@@ -2,26 +2,20 @@ import styled from 'styled-components';
 import { GetStaticProps } from 'next';
 import { END } from 'redux-saga';
 
-import { getPostsAsync } from '../store/modules/post'
-import { getCategoriesAsync } from '../store/modules/category'
-import { wrapper } from '../store/store'
-import { Post } from '../lib/types'
+import { wrapper } from '../store/store';
+import { getPostsAsync } from '../store/modules/post';
+import { getCategoriesAsync } from '../store/modules/category';
 
-import About from '../components/main/About'
-import CategoryTab from '../components/main/CategoryTab'
-import PostList from '../components/main/PostList'
+import About from '../components/main/About';
+import CategoryTab from '../components/main/CategoryTab';
+import PostList from '../components/main/PostList';
 
-type MainPageProps = {
-  posts: Post[];
-  categoryList: string[];
-}
-
-function MainPage({ posts, categoryList }: MainPageProps) {
+function MainPage() {
   return (
     <Wrapper>
       <About />
-      <CategoryTab categoryList={categoryList} />
-      <PostList posts={posts} />
+      <CategoryTab />
+      <PostList />
     </Wrapper>
   );
 }
@@ -34,19 +28,15 @@ const Wrapper = styled.section`
 `;
 
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
-  async ({ store }) => {
+  async (ctx) => {
+    const getPosts = ctx.store.dispatch(getPostsAsync.request());
+    const getCtgs = ctx.store.dispatch(getCategoriesAsync.request());
 
-    store.dispatch(getPostsAsync.request())
-    store.dispatch(getCategoriesAsync.request())
-    store.dispatch(END)
+    Promise.all([getPosts, getCtgs]);
+    ctx.store.dispatch(END);
 
-    await store.sagaTask.toPromise();
-    const posts = store.getState().post.posts.data;
-    const categoryList = store.getState().category.categoryList.data;
+    await ctx.store.sagaTask.toPromise();
 
-    return {
-      props: { posts, categoryList }
-    }
   }
 )
 
