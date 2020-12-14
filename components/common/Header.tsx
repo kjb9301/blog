@@ -1,9 +1,14 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import Logo from './Logo';
 
 function Header() {
+  const router = useRouter();
+
+  if (router.pathname === '/admin') return null;
+
   return (
     <Wrapper>
       <Logo />
