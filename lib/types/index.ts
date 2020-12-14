@@ -7,3 +7,8 @@ export type Post = {
   mdContent: string;
   regDate: string;
 }
+
+export type Login = {
+  email: string;
+  password: string;
+}

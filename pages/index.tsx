@@ -27,8 +27,10 @@ const Wrapper = styled.section`
   padding: 2rem 1rem;
 `;
 
-export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+export const getServerSideProps = wrapper.getServerSideProps(
   async (ctx) => {
+    const isServer = ctx.req ? true : false;
+    console.log('isServerrrrrrrrrrrrr', isServer);
     const getPosts = ctx.store.dispatch(getPostsAsync.request(''));
     const getCtgs = ctx.store.dispatch(getCategoriesAsync.request());
 

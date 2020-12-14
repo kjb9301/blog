@@ -4,10 +4,12 @@ import { all } from 'redux-saga/effects';
 
 import post, { postSaga } from './post';
 import category, { categorySaga } from './category';
+import auth, { authSaga } from './auth';
 
 const combineReducer = combineReducers({
   post,
   category,
+  auth
 });
 
 const rootReducer = (state, action) => {
@@ -25,5 +27,5 @@ export default rootReducer;
 export type RootState = ReturnType<typeof combineReducer>;
 
 export function* rootSaga() {
-  yield all([postSaga(), categorySaga()]);
+  yield all([postSaga(), categorySaga(), authSaga()]);
 }
