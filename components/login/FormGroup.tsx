@@ -55,7 +55,7 @@ function FormGroup({ isLoggedIn }: FormGroupProps) {
           />
         </>
       ) : null}
-      {error ? <ErrorText>{error}</ErrorText> : null}
+      {error ? <ErrorText>{error.message}</ErrorText> : null}
       <Button type='submit' onClick={onSubmit}>
         {!isLoggedIn ? '로그인' : '로그아웃'}
       </Button>
