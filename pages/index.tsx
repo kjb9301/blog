@@ -29,7 +29,7 @@ const Wrapper = styled.section`
 
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async (ctx) => {
-    const getPosts = ctx.store.dispatch(getPostsAsync.request());
+    const getPosts = ctx.store.dispatch(getPostsAsync.request(''));
     const getCtgs = ctx.store.dispatch(getCategoriesAsync.request());
 
     Promise.all([getPosts, getCtgs]);
