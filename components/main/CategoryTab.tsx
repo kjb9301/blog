@@ -7,14 +7,19 @@ import useCategory from '../../hooks/useCategory';
 
 import Categories from './Categories';
 
-function CategoryTab() {
+type CategoryTabProps = {
+  isLoggedIn: boolean;
+}
+
+function CategoryTab({ isLoggedIn }: CategoryTabProps) {
   const { selectedCtg, onClickCategory } = useCategory();
   const categoryList = useSelector((state: RootState) => state.category.categoryList.data)
 
   return (
     <Wrapper>
       <CtgWrapper>
-        <Category className={selectedCtg === '' ? 'selected' : ''} onClick={() => onClickCategory('')}>All</Category>
+        {isLoggedIn ? <Category>{`+`}</Category> : null}
+        <Category className={selectedCtg === '' ? 'selected' : ''} onClick={() => onClickCategory('')}>{`All`}</Category>
         {categoryList && <Categories categoryList={categoryList} selectedCtg={selectedCtg} onClickCategory={onClickCategory} />}
       </CtgWrapper>
     </Wrapper>

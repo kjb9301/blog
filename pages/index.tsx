@@ -1,20 +1,25 @@
 import styled from 'styled-components';
 import { GetStaticProps } from 'next';
+import { useSelector } from 'react-redux';
 import { END } from 'redux-saga';
 
 import { wrapper } from '../store/store';
 import { getPostsAsync } from '../store/modules/post';
 import { getCategoriesAsync } from '../store/modules/category';
+import { RootState } from '../store/modules';
 
 import About from '../components/main/About';
 import CategoryTab from '../components/main/CategoryTab';
 import PostList from '../components/main/PostList';
+import PostAddButton from '../components/main/PostAddButton';
 
 function MainPage() {
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
   return (
     <Wrapper>
       <About />
-      <CategoryTab />
+      <CategoryTab isLoggedIn={isLoggedIn} />
+      <PostAddButton isLoggedIn={isLoggedIn} />
       <PostList />
     </Wrapper>
   );
@@ -27,10 +32,8 @@ const Wrapper = styled.section`
   padding: 2rem 1rem;
 `;
 
-export const getServerSideProps = wrapper.getServerSideProps(
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async (ctx) => {
-    const isServer = ctx.req ? true : false;
-    console.log('isServerrrrrrrrrrrrr', isServer);
     const getPosts = ctx.store.dispatch(getPostsAsync.request(''));
     const getCtgs = ctx.store.dispatch(getCategoriesAsync.request());
 
@@ -38,7 +41,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
     ctx.store.dispatch(END);
 
     await ctx.store.sagaTask.toPromise();
-
   }
 )
 
