@@ -1,20 +1,18 @@
 import styled from 'styled-components';
 import { GetStaticProps } from 'next';
-import { useSelector } from 'react-redux';
 import { END } from 'redux-saga';
 
 import { wrapper } from '../store/store';
 import { getPostsAsync } from '../store/modules/post';
 import { getCategoriesAsync } from '../store/modules/category';
-import { RootState } from '../store/modules';
+import { PageProps } from '../lib/types';
 
 import About from '../components/main/About';
 import CategoryTab from '../components/main/CategoryTab';
 import PostList from '../components/main/PostList';
 import PostAddButton from '../components/main/PostAddButton';
 
-function MainPage() {
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+function MainPage({ isLoggedIn }: PageProps) {
   return (
     <Wrapper>
       <About />
@@ -34,6 +32,7 @@ const Wrapper = styled.section`
 
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async (ctx) => {
+
     const getPosts = ctx.store.dispatch(getPostsAsync.request(''));
     const getCtgs = ctx.store.dispatch(getCategoriesAsync.request());
 

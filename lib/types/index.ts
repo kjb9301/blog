@@ -1,3 +1,7 @@
+export type PageProps = {
+  isLoggedIn: boolean;
+}
+
 export type Post = {
   id: string;
   category: string;

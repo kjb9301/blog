@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { PageProps } from '../../lib/types';
+
 import LoginForm from '../../components/login/LoginForm';
 
-function LoginPage() {
+function LoginPage({ isLoggedIn }: PageProps) {
   return (
     <Wrapper>
-      <LoginForm />
+      <LoginForm isLoggedIn={isLoggedIn} />
     </Wrapper>
   );
 }

@@ -1,31 +1,36 @@
 import { AppProps, AppContext } from 'next/app';
-import withReduxSaga from 'next-redux-saga';
-import { END } from 'redux-saga';
 
 import { wrapper } from '../store/store'
 import GlobalStyles from '../lib/styles/global-styles';
-import { authLogin } from '../store/modules/auth';
 
 import Template from '../components/common/Template';
 
-function BlogApp({ Component, pageProps }: AppProps) {
+interface CustomAppProps extends AppProps {
+  isLoggedIn: boolean;
+}
+
+function BlogApp({ Component, pageProps, isLoggedIn }: CustomAppProps) {
   return (
     <>
       <GlobalStyles />
       <Template>
-        <Component {...pageProps} />
+        <Component {...pageProps} isLoggedIn={isLoggedIn} />
       </Template>
     </>
   );
 }
 
-BlogApp.getInitialProps = async ({ Component, ctx }) => {
+BlogApp.getInitialProps = async ({ Component, ctx }: AppContext) => {
   const isServer = ctx.req;
-  const cookie = isServer ? ctx.req.headers.cookie : '';
+  const cookie = isServer ? ctx.req?.headers.cookie : '';
   const isLoggedIn = cookie ? true : false;
 
-  await ctx.store.dispatch(authLogin(isLoggedIn));
+  const pageProps = Component.getInitialProps
+    ? await Component.getInitialProps(ctx)
+    : {}
+
+  return { pageProps, isLoggedIn }
 
 };
 
-export default wrapper.withRedux(withReduxSaga(BlogApp));
+export default wrapper.withRedux(BlogApp);

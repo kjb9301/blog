@@ -8,7 +8,7 @@ function* loginSaga(action: ReturnType<typeof loginAsync.request>) {
   try {
     const result = yield call(login, action.payload);
     yield put(loginAsync.success(result));
-    yield call(Router.push, '/', '/', {shallow: true});
+    yield call(Router.push, '/');
   } catch (err) {
     yield put(loginAsync.failure(err));
   }

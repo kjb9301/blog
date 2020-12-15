@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 type PostAddButtonProps = {
@@ -6,11 +7,12 @@ type PostAddButtonProps = {
 }
 
 function PostAddButton({ isLoggedIn }: PostAddButtonProps) {
-
   if (!isLoggedIn) return null;
   return (
     <Wrapper>
-      <Button>{`글 작성`}</Button>
+      <Link href='/editor'>
+        <Button >{`글 작성`}</Button>
+      </Link>
     </Wrapper>
   );
 }

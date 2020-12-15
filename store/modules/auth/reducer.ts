@@ -38,10 +38,13 @@ const auth = createReducer<AuthState, AuthAction>(initialState, {
       data: null
     }
   }),
-  [AUTH_LOGIN]: (state, action) => ({
-    ...state,
-    isLoggedIn: action.payload
-  }),
+  [AUTH_LOGIN]: (state, action) => {
+    console.log('payload', action.payload)
+    return {
+      ...state,
+      isLoggedIn: action.payload
+    }
+  },
 });
 
 export default auth;
