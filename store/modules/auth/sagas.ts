@@ -18,7 +18,7 @@ function* logoutSaga() {
   try {
     const result = yield call(logout);
     yield put(logoutAsync.success(result));
-    yield call(Router.push, '/', '/', {shallow: true});
+    yield call(Router.push, '/');
   } catch (err) {
     yield put(logoutAsync.failure(err));
   }

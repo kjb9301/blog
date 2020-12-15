@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { loginAsync, logoutAsync } from '../../store/modules/auth';
 import { RootState } from '../../store/modules';
@@ -36,7 +36,7 @@ function FormGroup({ isLoggedIn }: FormGroupProps) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper isLoggedIn={isLoggedIn}>
       {!isLoggedIn ? (
         <>
           <Input
@@ -56,17 +56,18 @@ function FormGroup({ isLoggedIn }: FormGroupProps) {
         </>
       ) : null}
       {error ? <ErrorText>{error.message}</ErrorText> : null}
-      <Button type='submit' onClick={onSubmit}>
+      <Button type='submit' onClick={onSubmit} isLoggedIn={isLoggedIn}>
         {!isLoggedIn ? '로그인' : '로그아웃'}
       </Button>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.form`
+const Wrapper = styled.form<{ isLoggedIn: boolean }>`
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: ${props => props.isLoggedIn ? 'relative' : ''};
 `;
 
 const Input = styled.input`
@@ -83,12 +84,22 @@ const ErrorText = styled.p`
   margin-bottom: 10px;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ isLoggedIn: boolean }>`
+  flex: 1;
   color: #fff;
   background-color: #04b486;
   outline: none;
   border-radius: 5px;
   cursor: pointer;
+  ${props =>
+    props.isLoggedIn &&
+    css`
+      position: absolute;
+      width: 100%;
+      height: 40px;
+      bottom: 0;
+    `
+  }
 `;
 
 export default FormGroup;
