@@ -12,17 +12,17 @@ function PostList() {
 
   const postsData = useSelector((state: RootState) => state.post.posts.data);
   const { selectedCategory } = useSelector((state: RootState) => state.category);
-  console.log('postsData', postsData);
+
   useEffect(() => {
     const listByCtg = filteringByCtg();
     setPostList(listByCtg as Post[])
-  }, [selectedCategory])
+  }, [postsData, selectedCategory])
 
   const filteringByCtg = () => {
     if (!selectedCategory) return postsData;
     return postsData?.filter(post => post.category === selectedCategory);
   }
-  console.log('postList', postList);
+
   return (
     <Wrapper>
       {postList && postList.map((post) => {

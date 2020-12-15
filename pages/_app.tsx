@@ -1,4 +1,4 @@
-import { AppProps } from 'next/app';
+import { AppProps, AppContext } from 'next/app';
 import withReduxSaga from 'next-redux-saga';
 import { END } from 'redux-saga';
 
@@ -21,23 +21,11 @@ function BlogApp({ Component, pageProps }: AppProps) {
 
 BlogApp.getInitialProps = async ({ Component, ctx }) => {
   const isServer = ctx.req;
-  console.log('isServer', isServer)
   const cookie = isServer ? ctx.req.headers.cookie : '';
-  if (isServer) {
-    const isLoggedIn = cookie ? true : false;
-    console.log('cookie', ctx.req.headers.cookie);
-    console.log('isLoggedIn', isLoggedIn);
-    await ctx.store.dispatch(authLogin(isLoggedIn));
-    ctx.store.dispatch(END);
+  const isLoggedIn = cookie ? true : false;
 
-    await ctx.store.sagaTask.toPromise();
-  }
+  await ctx.store.dispatch(authLogin(isLoggedIn));
 
-  const pageProps = Component.getInitialProps
-    ? await Component.getInitialProps(ctx)
-    : {};
-
-  return { pageProps };
 };
 
 export default wrapper.withRedux(withReduxSaga(BlogApp));
