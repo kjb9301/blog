@@ -5,20 +5,53 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
+import {
+  RenderPage,
+  NextComponentType,
+  AppContextType,
+  AppInitialProps,
+  AppPropsType,
+  DocumentInitialProps,
+} from 'next/dist/next-server/lib/utils';
+import { NextRouter } from 'next/router';
+import { ServerStyleSheet } from 'styled-components';
 
 class BlogDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const originalRenderPage = ctx.renderPage;
+    const sheet: ServerStyleSheet = new ServerStyleSheet();
+    const originalRenderPage: RenderPage = ctx.renderPage;
+    console.log(originalRenderPage);
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (
+            App: NextComponentType<
+              AppContextType<NextRouter>,
+              AppInitialProps,
+              AppPropsType<NextRouter, {}>
+            >
+          ) => (props: any) =>
+              sheet.collectStyles(<App {...props} />),
+        });
 
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: (App) => App,
-        enhanceComponent: (Component) => Component,
-      });
+      const initialProps: DocumentInitialProps = await Document.getInitialProps(
+        ctx
+      );
 
-    const initialProps = await Document.getInitialProps(ctx);
-
-    return initialProps;
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } catch (err) {
+      throw err;
+    } finally {
+      sheet.seal();
+    }
   }
 
   render() {
