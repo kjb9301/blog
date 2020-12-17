@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Description() {
+type DescriptionProps = {
+  description: string;
+  onChangeText: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+function Description({ description, onChangeText }: DescriptionProps) {
   return (
     <Wrapper>
       <TextArea
         name='description'
         placeholder='글에 대한 설명을 적으세요...'
+        value={description}
+        onChange={onChangeText}
       />
     </Wrapper>
   )

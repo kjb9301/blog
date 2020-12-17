@@ -2,13 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import useCategory from '../../hooks/useCategory';
 import { RootState } from '../../store/modules';
 
 import Categories from '../main/Categories';
 
-function CategoryList() {
-  const { selectedCtg, onClickCategory } = useCategory();
+type CategoryListProps = {
+  selectedCtg: string;
+  onClickCategory: (value: string) => void;
+}
+
+function CategoryList({ selectedCtg, onClickCategory }: CategoryListProps) {
   const categoryList = useSelector((state: RootState) => state.category.categoryList.data)
   return (
     <Wrapper>
@@ -35,4 +38,4 @@ const Wrapper = styled.ul`
   }
 `;
 
-export default CategoryList
+export default CategoryList;

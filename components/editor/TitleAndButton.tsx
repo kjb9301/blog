@@ -3,7 +3,12 @@ import styled from 'styled-components';
 
 import FormButtons from './FormButtons';
 
-function TitleAndButton() {
+type TitleAndButtonProps = {
+  title: string;
+  onChangeText: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function TitleAndButton({ title, onChangeText }: TitleAndButtonProps) {
   return (
     <Wrapper>
       <Title
@@ -11,6 +16,8 @@ function TitleAndButton() {
         name='title'
         type='text'
         placeholder='제목을 입력하세요.'
+        value={title}
+        onChange={onChangeText}
       />
       <FormButtons />
     </Wrapper>

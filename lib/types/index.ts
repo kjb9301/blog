@@ -12,6 +12,15 @@ export type Post = {
   regDate: string;
 }
 
+export type PostForm = {
+  category: string;
+  title: string;
+  description: string;
+  htmlContent: string;
+  mdContent: string;
+  regDate: Date;
+}
+
 export type Login = {
   email: string;
   password: string;
