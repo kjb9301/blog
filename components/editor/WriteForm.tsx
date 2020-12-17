@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { PostForm } from '../../lib/types';
 import useCategory from '../../hooks/useCategory';
+import { createPostAsync } from '../../store/modules/post';
 
 import TitleAndButton from './TitleAndButton';
 import CategoryList from './CategoryList';
 import Description from './Description';
 import MarkdownEditor from './MarkdownEditor';
-
-type Test = {
-  [key: string]: string;
-}
 
 function WriteForm() {
   const [postForm, setPostForm] = useState({
@@ -23,6 +20,7 @@ function WriteForm() {
   })
 
   const { selectedCtg, onClickCategory } = useCategory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setPostForm({
@@ -63,7 +61,7 @@ function WriteForm() {
   const handleSubmit = () => {
     const result = checkValidation();
     if (!result) return alert('모두 입력해주세요');
-    console.log('submit');
+    dispatch(createPostAsync.request(postForm));
   }
 
   return (

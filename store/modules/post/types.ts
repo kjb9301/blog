@@ -15,5 +15,10 @@ export type PostState = {
     loading: boolean;
     error: Error | null;
     data: Post | null;
+  };
+  postResult: {
+    loading: boolean,
+    error: Error | null,
+    data: string | null,
   }
 };

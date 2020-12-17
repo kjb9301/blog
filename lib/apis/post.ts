@@ -1,5 +1,6 @@
 import { fireStore } from '../common/firebase';
-import {convertToDate} from '../utils/date'
+import { convertToDate } from '../utils/date';
+import { PostForm } from '../types';
 
 const postCollection = fireStore.collection('posts');
 
@@ -59,5 +60,15 @@ export async function GetPost(id: string) {
       return err;
     });
   console.log('result',response)
+  return response;
+}
+
+export function AddPost(formData: PostForm) {
+  const response = postCollection
+    .add(formData)
+    .then(() => {
+      return 'success';
+    })
+
   return response;
 }
