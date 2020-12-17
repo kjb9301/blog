@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import FormButtons from './FormButtons';
-
 type TitleAndButtonProps = {
   title: string;
   onChangeText: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 }
 
-function TitleAndButton({ title, onChangeText }: TitleAndButtonProps) {
+function TitleAndButton({ title, onChangeText, onSubmit }: TitleAndButtonProps) {
   return (
     <Wrapper>
       <Title
@@ -19,7 +18,14 @@ function TitleAndButton({ title, onChangeText }: TitleAndButtonProps) {
         value={title}
         onChange={onChangeText}
       />
-      <FormButtons />
+      <BtnWrapper>
+        <button className='btn-register' type='submit' onClick={onSubmit}>
+          등록하기
+      </button>
+        <button className='btn-back'>
+          나가기
+      </button>
+      </BtnWrapper>
     </Wrapper>
   )
 }
@@ -39,6 +45,31 @@ const Title = styled.input`
       color: darkgray;
       padding-left: 10px;
     }
+`;
+
+const BtnWrapper = styled.div`
+  display: flex;
+  margin-left: auto;
+
+  button {
+    width: 100px;
+    padding: 10px 0;
+    font-weight: bold;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-register {
+    background-color: #4c80f1;
+    margin-right: 20px;
+  }
+
+  .btn-back {
+    border: 1px solid darkgray;
+    color: #000000;
+  }
 `;
 
 export default TitleAndButton
