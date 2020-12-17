@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ButtonGroup() {
+type ButttonGroupProps = {
+  onRemove: () => void;
+}
+
+function ButtonGroup({ onRemove }: ButttonGroupProps) {
   return (
     <Wrapper>
       <Button type='button' className='btn-modify'>
         수정
       </Button>
-      <Button type='button' className='btn-remove'>
+      <Button type='button' className='btn-remove' onClick={onRemove}>
         삭제
       </Button>
     </Wrapper>

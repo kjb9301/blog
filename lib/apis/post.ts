@@ -72,3 +72,14 @@ export function AddPost(formData: PostForm) {
 
   return response;
 }
+
+export function DeletePost(id: string) {
+  const response = postCollection
+    .doc(id)
+    .delete()
+    .then(() => {
+      return 'success';
+    })
+
+  return response;
+}

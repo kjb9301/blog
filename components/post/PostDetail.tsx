@@ -1,7 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { Post } from '../../lib/types';
+import { removePostAsync } from '../../store/modules/post';
 
 import ButtonGroup from './ButtonGroup';
 import Viewer from './Viewer';
@@ -11,11 +13,17 @@ type PostDetailProps = {
 }
 
 function PostDetail({ post }: PostDetailProps) {
-  const { title, regDate, htmlContent } = post;
+  const { id, title, regDate, htmlContent } = post;
+
+  const dispatch = useDispatch();
+
+  const handleRemove = () => {
+    dispatch(removePostAsync.request(id))
+  }
 
   return (
     <Wrapper>
-      <ButtonGroup />
+      <ButtonGroup onRemove={handleRemove} />
       <Title>{title}</Title>
       <Date>{regDate}</Date>
       <Viewer htmlContent={htmlContent} />
