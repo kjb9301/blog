@@ -3,21 +3,32 @@ import { useDispatch } from 'react-redux';
 
 import useCategory from '../../hooks/useCategory';
 import { createPostAsync } from '../../store/modules/post';
+import { PostForm } from '../../lib/types';
 
 import TitleAndButton from './TitleAndButton';
 import CategoryList from './CategoryList';
 import Description from './Description';
 import MarkdownEditor from './MarkdownEditor';
 
-function WriteForm() {
+type EditorFormProps = {
+  postData?: PostForm;
+}
+
+function EditorForm({ postData }: EditorFormProps) {
+  const [editMode, setEditMode] = useState(false);
   const [postForm, setPostForm] = useState({
-    title: '',
-    category: '',
-    description: '',
-    mdContent: '',
-    htmlContent: '',
+    title: postData?.title || '',
+    category: postData?.category || '',
+    description: postData?.description || '',
+    mdContent: postData?.mdContent || '',
+    htmlContent: postData?.htmlContent || '',
     regDate: new Date()
   })
+
+  useEffect(() => {
+    if (!postData) return;
+    setEditMode(!editMode);
+  }, [])
 
   const { selectedCtg, onClickCategory } = useCategory();
   const dispatch = useDispatch();
@@ -61,6 +72,9 @@ function WriteForm() {
   const handleSubmit = () => {
     const result = checkValidation();
     if (!result) return alert('모두 입력해주세요');
+    if (editMode) {
+
+    }
     dispatch(createPostAsync.request(postForm));
   }
 
@@ -74,4 +88,4 @@ function WriteForm() {
   )
 }
 
-export default WriteForm;
+export default EditorForm;

@@ -1,16 +1,20 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 type ButttonGroupProps = {
+  postId: string;
   onRemove: () => void;
 }
 
-function ButtonGroup({ onRemove }: ButttonGroupProps) {
+function ButtonGroup({ postId, onRemove }: ButttonGroupProps) {
   return (
     <Wrapper>
-      <Button type='button' className='btn-modify'>
-        수정
-      </Button>
+      <Link href={{ pathname: `/editor/${postId}` }}>
+        <Button type='button' className='btn-modify'>
+          수정
+        </Button>
+      </Link>
       <Button type='button' className='btn-remove' onClick={onRemove}>
         삭제
       </Button>

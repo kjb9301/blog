@@ -18,7 +18,7 @@ export type PostForm = {
   description: string;
   htmlContent: string;
   mdContent: string;
-  regDate: Date;
+  regDate: Date | string;
 }
 
 export type Login = {

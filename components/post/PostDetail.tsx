@@ -23,7 +23,7 @@ function PostDetail({ post }: PostDetailProps) {
 
   return (
     <Wrapper>
-      <ButtonGroup onRemove={handleRemove} />
+      <ButtonGroup postId={id} onRemove={handleRemove} />
       <Title>{title}</Title>
       <Date>{regDate}</Date>
       <Viewer htmlContent={htmlContent} />

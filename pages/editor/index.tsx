@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import WriteForm from '../../components/editor/WriteForm';
+import EditorForm from '../../components/editor/EditorForm';
 
 function WritePage() {
-  console.log('writepage');
   return (
     <Wrapper>
-      <WriteForm />
+      <EditorForm />
     </Wrapper>
   );
 }
