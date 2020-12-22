@@ -11,7 +11,7 @@ type PostItemProps = {
 function PostItem({ post }: PostItemProps) {
   const { id, title, description, regDate } = post;
   return (
-    <Link href={{ pathname: `/${id}` }}>
+    <Link href={{ pathname: `/post/${id}` }}>
       <Wrapper>
         <ItemHeader>
           <p className='post-title'>{title}</p>

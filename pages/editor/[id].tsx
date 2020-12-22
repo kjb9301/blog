@@ -1,15 +1,24 @@
-import React from 'react';
-import { END } from 'redux-saga';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { wrapper } from '../../store/store';
 import { getPostAsync } from '../../store/modules/post';
-
-import EditorForm from '../../components/editor/EditorForm';
-import { useSelector } from 'react-redux';
+import { getCategoriesAsync } from '../../store/modules/category';
 import { RootState } from '../../store/modules';
 
+import EditorForm from '../../components/editor/EditorForm';
+
 function EditPage() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const postId = router.query.id;
+
+  useEffect(() => {
+    dispatch(getPostAsync.request(postId as string))
+    dispatch(getCategoriesAsync.request())
+  }, [])
+
   const postData = useSelector((state: RootState) => state.post.post.data);
 
   if (!postData) return null;
@@ -26,12 +35,5 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
-  const postId = ctx.params?.id;
-  ctx.store.dispatch(getPostAsync.request(postId as string))
-  ctx.store.dispatch(END);
-  await ctx.store.sagaTask.toPromise();
-});
 
 export default EditPage;

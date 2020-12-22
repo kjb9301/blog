@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import {useDispatch} from 'react-redux'
 
-import {setCategory} from '../store/modules/category'
+import {setCategory} from '../store/modules/category';
 
-function useCategory() {
-  const [selectedCtg, setSelectedCtg] = useState('');
+function useCategory(category: string) {
+  const [selectedCtg, setSelectedCtg] = useState(category || '');
   const dispatch = useDispatch();
 
   const onClickCategory = (value: string) => {

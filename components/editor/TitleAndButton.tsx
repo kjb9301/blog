@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 type TitleAndButtonProps = {
   title: string;
+  editMode: boolean;
   onChangeText: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
 }
 
-function TitleAndButton({ title, onChangeText, onSubmit }: TitleAndButtonProps) {
+function TitleAndButton({ title, editMode, onChangeText, onSubmit }: TitleAndButtonProps) {
   return (
     <Wrapper>
       <Title
@@ -20,8 +21,8 @@ function TitleAndButton({ title, onChangeText, onSubmit }: TitleAndButtonProps) 
       />
       <BtnWrapper>
         <button className='btn-register' type='submit' onClick={onSubmit}>
-          등록하기
-      </button>
+          {editMode ? '수정하기' : '등록하기'}
+        </button>
         <button className='btn-back'>
           나가기
       </button>

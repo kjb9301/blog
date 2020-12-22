@@ -1,6 +1,6 @@
 import { fireStore } from '../common/firebase';
 import { convertToDate } from '../utils/date';
-import { PostForm } from '../types';
+import { PostForm, Post } from '../types';
 
 const postCollection = fireStore.collection('posts');
 
@@ -59,7 +59,7 @@ export async function GetPost(id: string) {
     .catch((err) => {
       return err;
     });
-  console.log('result',response)
+
   return response;
 }
 
@@ -79,6 +79,30 @@ export function DeletePost(id: string) {
     .delete()
     .then(() => {
       return 'success';
+    })
+
+  return response;
+}
+
+export function UpdatePost(formData: Post) {
+  const {id, title, description, mdContent, htmlContent, regDate } = formData;
+  const response = postCollection
+    .doc(id)
+    .set(
+      {
+        title,
+        description,
+        mdContent,
+        htmlContent,
+        regDate,
+      },
+      { merge: true }
+    )
+    .then(() => {
+      return {
+        status: 'success',
+        id
+      };
     })
 
   return response;

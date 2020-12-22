@@ -18,6 +18,10 @@ export const REMOVE_POST = 'post/REMOVE_POST';
 export const REMOVE_POST_SUCCESS = 'post/REMOVE_POST_SUCCESS';
 export const REMOVE_POST_ERROR = 'post/REMOVE_POST_ERROR';
 
+export const UPDATE_POST = 'post/UPDATE_POST';
+export const UPDATE_POST_SUCCESS = 'post/UPDATE_POST_SUCCESS';
+export const UPDATE_POST_ERROR = 'post/UPDATE_POST_ERROR';
+
 export const getPostsAsync = createAsyncAction(
   GET_POSTS,
   GET_POSTS_SUCCESS,
@@ -41,3 +45,9 @@ export const removePostAsync = createAsyncAction(
   REMOVE_POST_SUCCESS,
   REMOVE_POST_ERROR
 )<string, string, Error>();
+
+export const updatePostAsync = createAsyncAction(
+  UPDATE_POST,
+  UPDATE_POST_SUCCESS,
+  UPDATE_POST_ERROR
+)<any, string, Error>();

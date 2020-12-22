@@ -2,12 +2,12 @@ import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { END } from 'redux-saga';
 
-import { getPostAsync } from '../store/modules/post'
-import { GetPostIds } from '../lib/apis/post'
-import { Post } from '../lib/types'
-import { wrapper } from '../store/store'
+import { getPostAsync } from '../../store/modules/post'
+import { GetPostIds } from '../../lib/apis/post'
+import { Post } from '../../lib/types'
+import { wrapper } from '../../store/store'
 
-import PostDetail from '../components/post/PostDetail';
+import PostDetail from '../../components/post/PostDetail';
 
 type PostPageProps = {
   post: Post;

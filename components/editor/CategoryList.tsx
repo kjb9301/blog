@@ -12,7 +12,8 @@ type CategoryListProps = {
 }
 
 function CategoryList({ selectedCtg, onClickCategory }: CategoryListProps) {
-  const categoryList = useSelector((state: RootState) => state.category.categoryList.data)
+  const categoryList = useSelector((state: RootState) => state.category.categoryList.data);
+
   return (
     <Wrapper>
       {categoryList && <Categories categoryList={categoryList} selectedCtg={selectedCtg} onClickCategory={onClickCategory} />}
