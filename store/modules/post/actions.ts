@@ -50,4 +50,4 @@ export const updatePostAsync = createAsyncAction(
   UPDATE_POST,
   UPDATE_POST_SUCCESS,
   UPDATE_POST_ERROR
-)<any, string, Error>();
+)<Post, string, Error>();

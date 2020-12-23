@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import Router from 'next/router';
 
-import { loginAsync, logoutAsync, LOGIN, LOGOUT } from './actions';
-import { login, logout } from '../../../lib/apis/auth';
+import { loginAsync, logoutAsync, getUserInfoAsync, LOGIN, LOGOUT, GET_USER_INFO } from './actions';
+import { login, logout, GetUserInfo } from '../../../lib/apis/auth';
 
 function* loginSaga(action: ReturnType<typeof loginAsync.request>) {
   try {
@@ -24,7 +24,18 @@ function* logoutSaga() {
   }
 }
 
+function* getUserInfoSaga() {
+  try {
+    const result = yield call(GetUserInfo);
+    console.log(result)
+    yield put(getUserInfoAsync.success(result));
+  } catch(err) {
+    yield put(getUserInfoAsync.failure(err));
+  }
+}
+
 export function* authSaga() {
   yield takeEvery(LOGIN, loginSaga);
   yield takeEvery(LOGOUT, logoutSaga);
+  yield takeEvery(GET_USER_INFO, getUserInfoSaga);
 }

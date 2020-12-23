@@ -25,3 +25,9 @@ export type Login = {
   email: string;
   password: string;
 }
+
+export type User = {
+  name: string;
+  nickName: string;
+  introduction: string;
+}
