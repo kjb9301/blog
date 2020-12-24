@@ -27,7 +27,6 @@ function MainPage({ isLoggedIn }: PageProps) {
 }
 
 const Wrapper = styled.section`
-  border: 1px solid orange;
   width: 100%;
   max-width: 40rem;
   padding: 2rem 1rem;

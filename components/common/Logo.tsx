@@ -13,6 +13,8 @@ const Wrapper = styled.div`
   .text-logo {
     font-size: 2rem;
     color: #021969;
+    letter-spacing: -2px;
+    font-weight: bolder;
   }
 `;
 

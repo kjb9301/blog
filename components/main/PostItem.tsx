@@ -31,6 +31,12 @@ const Wrapper = styled.article`
   margin-bottom: 20px;
   padding: 0.8rem;
   cursor: pointer;
+
+  &:hover {
+    p {
+      color: ${props => props.theme.mainColor};
+    }
+  }
 `;
 
 const ItemHeader = styled.div`
