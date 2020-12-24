@@ -1,7 +1,11 @@
 import { AppProps, AppContext } from 'next/app';
+import { ThemeProvider } from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import { wrapper } from '../store/store'
 import GlobalStyles from '../lib/styles/global-styles';
+import { darkTheme, lightTheme } from '../lib/styles/theme';
+import { RootState } from '../store/modules';
 
 import Template from '../components/common/Template';
 
@@ -10,13 +14,14 @@ interface CustomAppProps extends AppProps {
 }
 
 function BlogApp({ Component, pageProps, isLoggedIn }: CustomAppProps) {
+  const { darkMode } = useSelector((state: RootState) => state.category);
   return (
-    <>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
       <Template>
         <Component {...pageProps} isLoggedIn={isLoggedIn} />
       </Template>
-    </>
+    </ThemeProvider>
   );
 }
 

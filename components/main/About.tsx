@@ -40,7 +40,7 @@ const ImgWrapper = styled.div`
     height: 80px;
     overflow: hidden;
     border-radius: 100%;
-    border: 1px solid #ecf0f2;
+    border: 1px solid ${props => props.theme.borderColor};
     position: relative;
 
     img {
@@ -66,17 +66,21 @@ const TextWrapper = styled.div`
 
   .profile-name {
     flex: .5;
+    
     .profile-name-prefix {
       font-size: 90%;
       margin-right: 4px;
     }
-
+    
     a {
-      background-color: #ecf0f2;
+      min-width: 60px;
+      background-color: ${props => props.theme.borderColor};
+      color: ${props => props.theme.mainColor};
       font-size: 95%;
       padding: 2px 10px;
       font-weight: bolder;
       border-radius: 8px;
+      text-align: center;
     }
   }
 
@@ -84,12 +88,13 @@ const TextWrapper = styled.div`
     flex: 1;
     font-size: 80%;
     line-height: 1.4;
-    color: #7d7d7d;
+    color: ${props => props.theme.subFont};
   }
 
   .profile-socials {
     flex: .5;
     font-size: 80%;
+    color: ${props => props.theme.mainColor};
   }
 `;
 

@@ -10,4 +10,5 @@ export type CategoryState = {
     data: string[] | null;
   };
   selectedCategory: string;
+  darkMode: boolean;
 };

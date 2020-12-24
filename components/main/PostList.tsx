@@ -24,18 +24,14 @@ function PostList() {
   }
 
   return (
-    <Wrapper>
+    <>
       {postList && postList.map((post) => {
         return (
           <PostItem key={post.id} post={post} />
         )
       })}
-    </Wrapper>
+    </>
   )
 }
-
-const Wrapper = styled.section`
-  border: 1px solid green;
-`;
 
 export default PostList;

@@ -8,6 +8,7 @@ import { getPostsAsync } from '../store/modules/post';
 import { getCategoriesAsync } from '../store/modules/category';
 import { PageProps } from '../lib/types';
 
+import LightAndDarkMode from '../components/common/LightAndDarkMode';
 import About from '../components/main/About';
 import CategoryTab from '../components/main/CategoryTab';
 import PostList from '../components/main/PostList';
@@ -16,6 +17,7 @@ import PostAddButton from '../components/main/PostAddButton';
 function MainPage({ isLoggedIn }: PageProps) {
   return (
     <Wrapper>
+      <LightAndDarkMode />
       <About />
       <CategoryTab isLoggedIn={isLoggedIn} />
       <PostAddButton isLoggedIn={isLoggedIn} />

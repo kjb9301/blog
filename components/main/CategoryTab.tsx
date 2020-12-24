@@ -12,14 +12,15 @@ type CategoryTabProps = {
 }
 
 function CategoryTab({ isLoggedIn }: CategoryTabProps) {
-  const { selectedCtg, onClickCategory } = useCategory();
-  const categoryList = useSelector((state: RootState) => state.category.categoryList.data)
+  const { selectedCtg, onClickCategory } = useCategory('');
+  const categoryList = useSelector((state: RootState) => state.category.categoryList.data);
+  const { darkMode } = useSelector((state: RootState) => state.category);
 
   return (
     <Wrapper>
-      <CtgWrapper>
+      <CtgWrapper darkMode={darkMode}>
         {isLoggedIn ? <Category>{`+`}</Category> : null}
-        <Category className={selectedCtg === '' ? 'selected' : ''} onClick={() => onClickCategory('')}>{`All`}</Category>
+        <Category className={selectedCtg === '' ? 'selected' : ''} onClick={() => onClickCategory('')}>all</Category>
         {categoryList && <Categories categoryList={categoryList} selectedCtg={selectedCtg} onClickCategory={onClickCategory} />}
       </CtgWrapper>
     </Wrapper>
@@ -30,13 +31,13 @@ const Wrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const CtgWrapper = styled.ul`
+const CtgWrapper = styled.ul<{ darkMode: boolean }>`
   width: 100%;
   padding: 10px 0;
-  background-color: #f4f7f8;
+  background-color: ${props => props.darkMode ? '#24272c' : '#f8f7f7'};
   border-style: solid;
   border-width: 1px 5px;
-  border-color: darkgray;
+  border-color: ${props => props.theme.borderColor};
   display: flex;
   overflow-x: scroll;
   white-space: nowrap;
@@ -46,20 +47,20 @@ const CtgWrapper = styled.ul`
   }
 
   .selected {
-    border: 2px solid #4c80f1;
-    color: #4c80f1;
-    font-weight: bolder;
+    border: 2px solid ${props => props.theme.mainColor};
+    color: ${props => props.theme.mainColor};
+    font-weight: bold;
   }
 `;
 
 const Category = styled.li`
-  border: 1px solid darkgray;
+  border: 1px solid ${props => props.theme.borderColor};
   border-radius: 10px;
   text-align: center;
   line-height: 1.3;
   margin-right: 10px;
   padding: 5px 25px;
-  background-color: #fff;
+  background-color: ${props => props.theme.basicBg};
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
@@ -68,8 +69,9 @@ const Category = styled.li`
   }
 
   &:hover {
-    border: 1px solid #4c80f1;
-    color: #4c80f1;
+    border: 1px solid ${props => props.theme.mainColor};
+    color: ${props => props.theme.mainColor};
+    font-weight: 600;
   }
 `;
 

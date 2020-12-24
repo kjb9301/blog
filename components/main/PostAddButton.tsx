@@ -23,10 +23,15 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-  border: 1px solid black;
+  border: 1px solid ${props => props.theme.borderColor};
   width: 100%;
   border-radius: 5px;
   padding: 10px;
+
+  &:hover {
+    border: 1px solid ${props => props.theme.mainFont};
+    font-weight: bold;
+  }
 `;
 
 export default PostAddButton;

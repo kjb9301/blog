@@ -20,13 +20,13 @@ function Categories({ categoryList, selectedCtg, onClickCategory }: CategoryList
 }
 
 const Category = styled.li`
-  border: 1px solid darkgray;
+  border: 1px solid ${props => props.theme.borderColor};
   border-radius: 10px;
   text-align: center;
   line-height: 1.3;
   margin-right: 10px;
   padding: 5px 25px;
-  background-color: #fff;
+  background-color: ${props => props.theme.basicBg};
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
@@ -35,8 +35,8 @@ const Category = styled.li`
   }
 
   &:hover {
-    border: 1px solid #4c80f1;
-    color: #4c80f1;
+    border: 1px solid ${props => props.theme.mainColor};
+    color: ${props => props.theme.mainColor};
   }
 `;
 
