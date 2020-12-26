@@ -26,7 +26,7 @@ export const getPostsAsync = createAsyncAction(
   GET_POSTS,
   GET_POSTS_SUCCESS,
   GET_POSTS_ERROR
-)<string, Post[], Error>();
+)<void, Post[], Error>();
 
 export const getPostAsync = createAsyncAction(
   GET_POST,

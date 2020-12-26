@@ -4,15 +4,15 @@ import { PostForm, Post } from '../types';
 
 const postCollection = fireStore.collection('posts');
 
-export async function GetPosts(category?: string) {
-  const newPostCollection = category
-    ? postCollection.where('category', "==", category)
-    : postCollection;
+export async function GetPosts() {
 
-  const response = await newPostCollection
+  const response = await postCollection
+    .orderBy("regDate", "desc")
+    // .limit(3)
     .get()
     .then((snapshot) => {
       return snapshot.docs.map((doc) => {
+        console.log('doc',doc)
         const docData = doc.data();
         const data = {
           ...docData,
@@ -26,6 +26,28 @@ export async function GetPosts(category?: string) {
     .catch((err) => {
       return err;
     });
+
+    // var first = newPostCollection.limit(5);
+
+    // first.get().then(async function (documentSnapshots) {
+    // // Get the last visible document
+    // var lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
+    // console.log("last", lastVisible.data());
+
+    // // Construct a new query starting at this document,
+    // // get the next 25 cities.
+    // var next = await newPostCollection
+    //       .startAfter(lastVisible)
+    //       .limit(3)
+    //       .get()
+    //       .then(sh => {
+    //         sh.docs.map((doc) => {
+    //           console.log(doc.data())
+    //           return doc.data()
+    //         })
+    //       })
+    //     console.log('next', next)
+    // });
 
   return response;
 }

@@ -4,9 +4,9 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { getPostsAsync, GET_POSTS, getPostAsync, GET_POST, createPostAsync, CREATE_POST, removePostAsync, REMOVE_POST, updatePostAsync, UPDATE_POST } from './actions';
 import { GetPosts, GetPost, AddPost, DeletePost, UpdatePost } from '../../../lib/apis/post';
 
-function* getPostsSaga(action: ReturnType<typeof getPostsAsync.request>) {
+function* getPostsSaga() {
   try {
-    const posts = yield call(GetPosts, action.payload);
+    const posts = yield call(GetPosts);
     yield put(getPostsAsync.success(posts));
   } catch (err) {
     yield put(getPostsAsync.failure(err));
