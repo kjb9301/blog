@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import Router from 'next/router';
 
 import { loginAsync, logoutAsync, getUserInfoAsync, LOGIN, LOGOUT, GET_USER_INFO } from './actions';
@@ -35,7 +35,9 @@ function* getUserInfoSaga() {
 }
 
 export function* authSaga() {
-  yield takeEvery(LOGIN, loginSaga);
-  yield takeEvery(LOGOUT, logoutSaga);
-  yield takeEvery(GET_USER_INFO, getUserInfoSaga);
+  yield all([
+    takeLatest(LOGIN, loginSaga),
+    takeLatest(LOGOUT, logoutSaga),
+    takeLatest(GET_USER_INFO, getUserInfoSaga),
+  ]);
 }

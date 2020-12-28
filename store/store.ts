@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createWrapper } from 'next-redux-wrapper';
-import createSagaMiddleware, { Task } from 'redux-saga';
+import createSagaMiddleware from 'redux-saga';
 
 import rootReducer, { rootSaga } from './modules'
 
-export interface SagaStore extends Store<any, any> {
-  sagaTask?: Task;
+export interface SagaStore extends Store {
+  sagaTask?: any;
 }
 
 const configureStore = () => {

@@ -18,12 +18,12 @@ function PostDetail({ post }: PostDetailProps) {
   const dispatch = useDispatch();
 
   const handleRemove = () => {
-    dispatch(removePostAsync.request(id))
+    dispatch(removePostAsync.request(id as string))
   }
 
   return (
     <Wrapper>
-      <ButtonGroup postId={id} onRemove={handleRemove} />
+      <ButtonGroup postId={id as string} onRemove={handleRemove} />
       <Title>{title}</Title>
       <Date>{regDate}</Date>
       <Viewer htmlContent={htmlContent} />

@@ -4,9 +4,8 @@ import { PostForm, Post } from '../types';
 
 const postCollection = fireStore.collection('posts');
 
-export async function GetPosts() {
-
-  const response =  await postCollection
+export function GetPosts() {
+  const response =  postCollection
     .orderBy("regDate", "desc")
     .get()
     .then((snapshot) => {
@@ -70,8 +69,8 @@ export function GetPostIds() {
   return response;
 }
 
-export async function GetPost(id: string) {
-  const response = await postCollection
+export function GetPost(id: string) {
+  const response = postCollection
     .doc(id)
     .get()
     .then((docSnapshot) => {
@@ -86,9 +85,6 @@ export async function GetPost(id: string) {
         return data;
       }
     })
-    .catch((err) => {
-      return err;
-    });
 
   return response;
 }

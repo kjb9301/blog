@@ -5,7 +5,7 @@ import { END } from 'redux-saga';
 import { getPostAsync } from '../../store/modules/post'
 import { GetPostIds } from '../../lib/apis/post'
 import { Post } from '../../lib/types'
-import { wrapper } from '../../store/store'
+import { wrapper, SagaStore } from '../../store/store'
 
 import PostDetail from '../../components/post/PostDetail';
 
@@ -19,9 +19,9 @@ function PostPage({ post }: PostPageProps) {
 
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async ({ store, params }) => {
-    store.dispatch(getPostAsync.request(params.id as string))
+    store.dispatch(getPostAsync.request(params?.id as string))
     store.dispatch(END);
-    await store.sagaTask.toPromise();
+    await (store as SagaStore).sagaTask.toPromise();
 
     const { data } = store.getState().post.post
 

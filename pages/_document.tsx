@@ -20,7 +20,6 @@ class BlogDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet: ServerStyleSheet = new ServerStyleSheet();
     const originalRenderPage: RenderPage = ctx.renderPage;
-    console.log(originalRenderPage);
     try {
       ctx.renderPage = () =>
         originalRenderPage({

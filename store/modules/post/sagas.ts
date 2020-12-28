@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { getPostsAsync, GET_POSTS, getPostAsync, GET_POST, createPostAsync, CREATE_POST, removePostAsync, REMOVE_POST, updatePostAsync, UPDATE_POST } from './actions';
 import { GetPosts, GetPost, AddPost, DeletePost, UpdatePost } from '../../../lib/apis/post';
@@ -54,9 +54,11 @@ function* updatePostSaga(action: ReturnType<typeof updatePostAsync.request>) {
 }
 
 export function* postSaga() {
-  yield takeLatest(GET_POSTS, getPostsSaga);
-  yield takeEvery(GET_POST, getPostSaga);
-  yield takeEvery(CREATE_POST, createPostSaga);
-  yield takeEvery(REMOVE_POST, removePostSaga);
-  yield takeEvery(UPDATE_POST, updatePostSaga);
+  yield all([
+    takeLatest(GET_POSTS, getPostsSaga),
+    takeLatest(GET_POST, getPostSaga),
+    takeLatest(CREATE_POST, createPostSaga),
+    takeLatest(REMOVE_POST, removePostSaga),
+    takeLatest(UPDATE_POST, updatePostSaga),
+  ])
 }
