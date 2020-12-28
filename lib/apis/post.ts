@@ -6,13 +6,11 @@ const postCollection = fireStore.collection('posts');
 
 export async function GetPosts() {
 
-  const response = await postCollection
+  const response =  await postCollection
     .orderBy("regDate", "desc")
-    // .limit(3)
     .get()
     .then((snapshot) => {
       return snapshot.docs.map((doc) => {
-        console.log('doc',doc)
         const docData = doc.data();
         const data = {
           ...docData,
@@ -23,33 +21,43 @@ export async function GetPosts() {
         return data;
       });
     })
-    .catch((err) => {
-      return err;
-    });
+    
+    return response;
 
-    // var first = newPostCollection.limit(5);
+    // const lastDoc = await postCollection
+    //   .doc(index)
+    //   .get()
+    //   .then((docSnapshot) => {
+    //     return docSnapshot
+    //   })
 
-    // first.get().then(async function (documentSnapshots) {
-    // // Get the last visible document
-    // var lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
-    // console.log("last", lastVisible.data());
+    //   console.log('lastdoc', lastDoc)
 
-    // // Construct a new query starting at this document,
-    // // get the next 25 cities.
-    // var next = await newPostCollection
-    //       .startAfter(lastVisible)
-    //       .limit(3)
-    //       .get()
-    //       .then(sh => {
-    //         sh.docs.map((doc) => {
-    //           console.log(doc.data())
-    //           return doc.data()
-    //         })
-    //       })
-    //     console.log('next', next)
-    // });
+    // const list = postCollection
+    //   // .orderBy("regDate", "desc")
+    //   .startAfter(lastDoc)
+    //   .limit(3)
+    //   .get()
+    //   .then(sh => {
+    //     return sh.docs.map((doc) => {
+    //       if(doc.exists) {
+    //         const docData = doc.data();
+    //         const data = {
+    //           ...docData,
+    //           id: doc.id,
+    //           regDate: convertToDate(docData.regDate),
+    //         };
+    //         console.log('data', data)
+    //         return data;
+    //       }
+    //     });
+    //   })
+    //   .then((result) => {
+    //     return result;
+    //   })
 
-  return response;
+    // return list;
+
 }
 
 export function GetPostIds() {

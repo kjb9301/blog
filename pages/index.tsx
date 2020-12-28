@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async (ctx) => {
 
     const getUserInfo = ctx.store.dispatch(getUserInfoAsync.request());
-    const getPosts = ctx.store.dispatch(getPostsAsync.request());
+    const getPosts = ctx.store.dispatch(getPostsAsync.request(null));
     const getCtgs = ctx.store.dispatch(getCategoriesAsync.request());
 
     Promise.all([getUserInfo, getPosts, getCtgs]);

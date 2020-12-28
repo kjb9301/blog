@@ -17,7 +17,7 @@ const initialState: PostState = {
     loading: false,
     error: null,
     data: null,
-  }
+  },
 };
 
 const post = createReducer<PostState, PostAction>(initialState, {
@@ -35,7 +35,7 @@ const post = createReducer<PostState, PostAction>(initialState, {
       loading: false,
       error: null,
       data: action.payload
-    }
+    },
   }),
   [GET_POSTS_ERROR]: (state, action) => ({
     ...state,

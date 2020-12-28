@@ -1,12 +1,12 @@
 import Router from 'next/router';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import { getPostsAsync, GET_POSTS, getPostAsync, GET_POST, createPostAsync, CREATE_POST, removePostAsync, REMOVE_POST, updatePostAsync, UPDATE_POST } from './actions';
 import { GetPosts, GetPost, AddPost, DeletePost, UpdatePost } from '../../../lib/apis/post';
 
 function* getPostsSaga() {
   try {
-    const posts = yield call(GetPosts);
+    const posts = yield call(GetPosts)
     yield put(getPostsAsync.success(posts));
   } catch (err) {
     yield put(getPostsAsync.failure(err));
@@ -54,7 +54,7 @@ function* updatePostSaga(action: ReturnType<typeof updatePostAsync.request>) {
 }
 
 export function* postSaga() {
-  yield takeEvery(GET_POSTS, getPostsSaga);
+  yield takeLatest(GET_POSTS, getPostsSaga);
   yield takeEvery(GET_POST, getPostSaga);
   yield takeEvery(CREATE_POST, createPostSaga);
   yield takeEvery(REMOVE_POST, removePostSaga);

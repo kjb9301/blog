@@ -1,6 +1,6 @@
 import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
-import { all } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 
 import post, { postSaga } from './post';
 import category, { categorySaga } from './category';
@@ -27,5 +27,9 @@ export default rootReducer;
 export type RootState = ReturnType<typeof combineReducer>;
 
 export function* rootSaga() {
-  yield all([postSaga(), categorySaga(), authSaga()]);
+  yield all([
+    fork(postSaga),
+    fork(categorySaga),
+    fork(authSaga)
+  ]);
 }
