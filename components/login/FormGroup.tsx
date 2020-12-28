@@ -47,7 +47,7 @@ function FormGroup({ isLoggedIn }: FormGroupProps) {
             onChange={onChangeInput}
           />
           <Input
-            type='text'
+            type='password'
             name='password'
             placeholder='password'
             value={formData.password}

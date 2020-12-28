@@ -27,9 +27,11 @@ const Button = styled.button`
   width: 100%;
   border-radius: 5px;
   padding: 10px;
+  color: ${props => props.theme.mainFont};
 
   &:hover {
-    border: 1px solid ${props => props.theme.mainFont};
+    border: 1px solid ${props => props.theme.mainColor};
+    color: ${props => props.theme.mainColor};
     font-weight: bold;
   }
 `;

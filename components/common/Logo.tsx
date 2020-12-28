@@ -1,15 +1,20 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 function Logo() {
   return (
-    <Wrapper>
-      <span className='text-logo'>JBLog</span>
-    </Wrapper>
+    <Link href='/'>
+      <Wrapper>
+        <span className='text-logo'>JBLog</span>
+      </Wrapper>
+    </Link>
   );
 }
 
 const Wrapper = styled.div`
+  cursor: pointer;
+
   .text-logo {
     font-size: 2rem;
     color: #021969;

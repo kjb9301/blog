@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router';
 import styled from 'styled-components';
 
 type TitleAndButtonProps = {
@@ -23,9 +24,9 @@ function TitleAndButton({ title, editMode, onChangeText, onSubmit }: TitleAndBut
         <button className='btn-register' type='submit' onClick={onSubmit}>
           {editMode ? '수정하기' : '등록하기'}
         </button>
-        <button className='btn-back'>
+        <button className='btn-back' onClick={() => Router.back()}>
           나가기
-      </button>
+        </button>
       </BtnWrapper>
     </Wrapper>
   )
