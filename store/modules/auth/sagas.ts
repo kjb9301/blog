@@ -27,7 +27,6 @@ function* logoutSaga() {
 function* getUserInfoSaga() {
   try {
     const result = yield call(GetUserInfo);
-    console.log(result)
     yield put(getUserInfoAsync.success(result));
   } catch(err) {
     yield put(getUserInfoAsync.failure(err));

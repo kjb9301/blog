@@ -16,5 +16,4 @@ export type AuthState = {
     error: Error | null;
     data: string | null;
   };
-  isLoggedIn: boolean;
 };

@@ -1,7 +1,7 @@
 import { createReducer } from 'typesafe-actions';
 
 import { AuthState, AuthAction } from './types';
-import { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, AUTH_LOGIN, GET_USER_INFO, GET_USER_INFO_SUCCESS, GET_USER_INFO_ERROR } from './actions';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, GET_USER_INFO, GET_USER_INFO_SUCCESS, GET_USER_INFO_ERROR } from './actions';
 
 const initialState: AuthState = {
   user: {
@@ -14,7 +14,6 @@ const initialState: AuthState = {
     error: null,
     data: null
   },
-  isLoggedIn: false,
 };
 
 const auth = createReducer<AuthState, AuthAction>(initialState, {
@@ -33,7 +32,6 @@ const auth = createReducer<AuthState, AuthAction>(initialState, {
       error: null,
       data: action.payload
     },
-    isLoggedIn: !state.isLoggedIn
   }),
   [LOGIN_ERROR]: (state, action) => ({
     ...state,
@@ -42,10 +40,6 @@ const auth = createReducer<AuthState, AuthAction>(initialState, {
       error: action.payload,
       data: null
     }
-  }),
-  [AUTH_LOGIN]: (state, action) => ({
-    ...state,
-    isLoggedIn: action.payload
   }),
   [GET_USER_INFO]: state => ({
     ...state,

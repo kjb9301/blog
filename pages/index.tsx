@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { GetStaticProps } from 'next';
 import { END } from 'redux-saga';
+import Head from 'next/head';
 
 import { wrapper, SagaStore } from '../store/store';
 import { getUserInfoAsync } from '../store/modules/auth';
@@ -16,13 +17,20 @@ import PostAddButton from '../components/main/PostAddButton';
 
 function MainPage({ isLoggedIn }: PageProps) {
   return (
-    <Wrapper>
-      <LightAndDarkMode />
-      <About />
-      <CategoryTab isLoggedIn={isLoggedIn} />
-      <PostAddButton isLoggedIn={isLoggedIn} />
-      <PostList />
-    </Wrapper>
+    <>
+      <Head>
+        <title>{`Home | JBlog`}</title>
+        <meta name="keywords" content="JBlog, jb, front-end, react, next" />
+        <meta name="description" content="안녕하세요. 프론트엔드 개발자 강종빈입니다." />
+      </Head>
+      <Wrapper>
+        <LightAndDarkMode />
+        <About />
+        <CategoryTab isLoggedIn={isLoggedIn} />
+        <PostAddButton isLoggedIn={isLoggedIn} />
+        <PostList />
+      </Wrapper>
+    </>
   );
 }
 

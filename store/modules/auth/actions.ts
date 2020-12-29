@@ -1,4 +1,4 @@
-import { createAsyncAction, createAction } from 'typesafe-actions';
+import { createAsyncAction } from 'typesafe-actions';
 
 import { Login, User } from '../../../lib/types';
 
@@ -9,8 +9,6 @@ export const LOGIN_ERROR = 'auth/LOGIN_ERROR';
 export const LOGOUT = 'auth/LOGOUT';
 export const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'auth/LOGOUT_ERROR';
-
-export const AUTH_LOGIN = 'auth/AUTH_LOGIN';
 
 export const GET_USER_INFO = 'auth/GET_USER_INFO';
 export const GET_USER_INFO_SUCCESS = 'auth/GET_USER_INFO_SUCCESS';
@@ -33,6 +31,3 @@ export const getUserInfoAsync = createAsyncAction(
   GET_USER_INFO_SUCCESS,
   GET_USER_INFO_ERROR
 )<void, User, Error>();
-
-export const authLogin = createAction(AUTH_LOGIN, auth => auth)();
-
