@@ -12,7 +12,7 @@ const combineReducer = combineReducers({
   auth
 });
 
-const rootReducer = (state, action) => {
+const rootReducer = (state: any, action: any) => {
   switch (action.type) {
     case HYDRATE:
       console.log('hydrate', action);
