@@ -9,7 +9,7 @@ export type Post = {
   description: string;
   htmlContent: string;
   mdContent: string;
-  regDate: string;
+  regDate: string | Date;
 }
 
 export type PostForm = {

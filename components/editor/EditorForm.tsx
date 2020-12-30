@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import useCategory from '../../hooks/useCategory';
 import { createPostAsync, updatePostAsync } from '../../store/modules/post';
-import { PostForm, Post } from '../../lib/types';
+import { Post } from '../../lib/types';
 
 import TitleAndButton from './TitleAndButton';
 import CategoryList from './CategoryList';
@@ -30,7 +30,7 @@ function EditorForm({ postData }: EditorFormProps) {
     setEditMode(!editMode);
   }, [])
 
-  const { selectedCtg, onClickCategory } = useCategory(postData?.category);
+  const { selectedCtg, onClickCategory } = useCategory(postData!.category);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function EditorForm({ postData }: EditorFormProps) {
     if (editMode) {
       dispatch(updatePostAsync.request({
         ...postForm,
-        id: postData.id
+        id: postData?.id
       }))
     } else {
       dispatch(createPostAsync.request(postForm));
