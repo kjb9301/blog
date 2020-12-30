@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import useCategory from '../../hooks/useCategory';
 import { createPostAsync, updatePostAsync } from '../../store/modules/post';
-import { Post } from '../../lib/types';
+import { Post, PostForm } from '../../lib/types';
 
 import TitleAndButton from './TitleAndButton';
 import CategoryList from './CategoryList';
@@ -13,6 +13,9 @@ import MarkdownEditor from './MarkdownEditor';
 type EditorFormProps = {
   postData?: Post;
 }
+
+type PostFormKey = keyof PostForm;
+type PostFormValue = PostForm[PostFormKey];
 
 function EditorForm({ postData }: EditorFormProps) {
   const [editMode, setEditMode] = useState(false);
@@ -30,7 +33,7 @@ function EditorForm({ postData }: EditorFormProps) {
     setEditMode(!editMode);
   }, [])
 
-  const { selectedCtg, onClickCategory } = useCategory(postData!.category);
+  const { selectedCtg, onClickCategory } = useCategory(postForm.category);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,15 +62,15 @@ function EditorForm({ postData }: EditorFormProps) {
   }
 
   const checkValidation = () => {
-    let result = true;
-    for (let key in postForm) {
-      const value = postForm[key];
-      if (!value) {
-        result = false;
-        break;
-      }
-    }
-    return result;
+    const formKey = Object.keys(postForm) as PostFormKey[];
+
+    const validation = formKey.every((key: PostFormKey) => {
+      const value: PostFormValue = postForm[key];
+      const result = value ? true : false;
+      return result;
+    })
+
+    return validation;
   };
 
   const handleSubmit = () => {
@@ -76,7 +79,7 @@ function EditorForm({ postData }: EditorFormProps) {
     if (editMode) {
       dispatch(updatePostAsync.request({
         ...postForm,
-        id: postData?.id
+        id: postData?.id as string
       }))
     } else {
       dispatch(createPostAsync.request(postForm));

@@ -12,10 +12,10 @@ import EditorForm from '../../components/editor/EditorForm';
 function EditPage() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const postId = router.query.id;
+  const postId = router.query.id as string;
 
   useEffect(() => {
-    dispatch(getPostAsync.request(postId as string))
+    dispatch(getPostAsync.request(postId))
     dispatch(getCategoriesAsync.request())
   }, [])
 

@@ -3,7 +3,7 @@ export type PageProps = {
 }
 
 export type Post = {
-  id?: string;
+  id: string;
   category: string;
   title: string;
   description: string;
