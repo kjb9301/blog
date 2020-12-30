@@ -2,6 +2,7 @@
 
 # config
 /lib/common/config.js
+/public/images/user.jpg
 
 # dependencies
 /node_modules
