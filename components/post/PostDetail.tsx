@@ -10,9 +10,10 @@ import Viewer from './Viewer';
 
 type PostDetailProps = {
   post: Post;
+  isLoggedIn: boolean;
 }
 
-function PostDetail({ post }: PostDetailProps) {
+function PostDetail({ post, isLoggedIn }: PostDetailProps) {
   const { id, title, regDate, htmlContent } = post;
 
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function PostDetail({ post }: PostDetailProps) {
 
   return (
     <Wrapper>
-      <ButtonGroup postId={id as string} onRemove={handleRemove} />
+      <ButtonGroup postId={id as string} isLoggedIn={isLoggedIn} onRemove={handleRemove} />
       <Title>{title}</Title>
       <Date>{regDate}</Date>
       <Viewer htmlContent={htmlContent} />

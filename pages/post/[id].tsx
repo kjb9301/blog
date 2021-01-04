@@ -6,13 +6,13 @@ import Head from 'next/head';
 
 import { getPostAsync } from '../../store/modules/post'
 import { GetPostIds } from '../../lib/apis/post'
-import { Post } from '../../lib/types'
+import { PageProps } from '../../lib/types'
 import { wrapper, SagaStore } from '../../store/store'
 import { RootState } from '../../store/modules';
 
 import PostDetail from '../../components/post/PostDetail';
 
-function PostPage() {
+function PostPage({ isLoggedIn }: PageProps) {
   const { data: post } = useSelector((state: RootState) => state.post.post);
   if (!post) return null;
   return (
@@ -22,7 +22,7 @@ function PostPage() {
         <meta name="keywords" content={post.category} />
         <meta name="description" content={post.description} />
       </Head>
-      <PostDetail post={post} />
+      <PostDetail post={post} isLoggedIn={isLoggedIn} />
     </>
   );
 }

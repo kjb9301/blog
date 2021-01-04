@@ -4,10 +4,12 @@ import styled from 'styled-components';
 
 type ButttonGroupProps = {
   postId: string;
+  isLoggedIn: boolean;
   onRemove: () => void;
 }
 
-function ButtonGroup({ postId, onRemove }: ButttonGroupProps) {
+function ButtonGroup({ postId, isLoggedIn, onRemove }: ButttonGroupProps) {
+  if (!isLoggedIn) return null;
   return (
     <Wrapper>
       <Link href={{ pathname: `/editor/${postId}` }}>
