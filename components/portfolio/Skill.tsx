@@ -11,6 +11,7 @@ function Skill() {
 
 const Wrapper = styled.section`
   border: 1px solid blue;
+  min-height: 600px;
 `;
 
 export default Skill;

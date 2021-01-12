@@ -15,6 +15,7 @@ const Wrapper = styled.header`
 
 const Nav = styled.nav`
   position: fixed;
+  width: 300px;
   top: 0;
   right: 10px;
   background-color: rgba(0, 0, 0, 0.5);

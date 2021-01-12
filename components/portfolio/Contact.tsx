@@ -1,17 +1,17 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function About() {
+function Contact() {
   return (
     <Wrapper>
-      about
+      contact
     </Wrapper>
   )
 }
 
 const Wrapper = styled.section`
-  border: 1px solid red;
+  border: 1px solid orange;
   min-height: 600px;
 `;
 
-export default About
+export default Contact;

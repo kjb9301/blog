@@ -11,6 +11,7 @@ function Project() {
 
 const Wrapper = styled.section`
   border: 1px solid green;
+  min-height: 600px;
 `;
 
 export default Project;

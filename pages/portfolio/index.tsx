@@ -2,6 +2,7 @@ import PortfolioLayout from '../../components/portfolio/PortfolioLayout';
 import About from '../../components/portfolio/About';
 import Skill from '../../components/portfolio/Skill';
 import Project from '../../components/portfolio/Project';
+import Contact from '../../components/portfolio/Contact';
 
 function PortfolioPage() {
   return (
@@ -9,6 +10,7 @@ function PortfolioPage() {
       <About />
       <Skill />
       <Project />
+      <Contact />
     </PortfolioLayout>
   )
 }
